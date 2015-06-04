@@ -1,0 +1,5 @@
+\begin{circuitikz}
+\draw (0,0) to [I=$4\phase{30^\circ}$] (0,2.5) to [short] (2,2.5) to [R,l=2<\ohm>,v=$\mathbf V_0$] (2,0) to [short] (0,0);
+\draw (2,2.5) to [L,l=$j4\,\si{\ohm}$] (4,2.5) to [cV=$3\mathbf V_0$] (4,0) to [short] (2,0);
+\draw (4,2.5) to [short] (6,2.5) to [C=$-j2\,\si{\ohm}$,i=$\mathbf I_0$] (6,0) to [short] (4,0);
+\end{circuitikz}
