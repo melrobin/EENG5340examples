@@ -1,0 +1,15 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\section{Introduction}
+On this sheet we merely want to illustrate the use of complex BLAS routines.  There is really no substantial difference between the complex BLAS routines and the real BLAS routines, save that you should use an array of structs or classes to construct the complex entries instead of merely having an array.  
+\section{Technical Discussion}
+We wish to solve the equation (note that I have deliberately included equation numbers in this document)
+\begin{equation}
+\begin{bmatrix}
+j0.5 & 7+j2.5\\3.5+j1.5&10.5+j3.5
+\end{bmatrix}
+=\begin{bmatrix}
+2.5-j3.2\\-23+j7
+\end{bmatrix}
+\end{equation}
