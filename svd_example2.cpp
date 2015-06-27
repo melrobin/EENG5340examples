@@ -61,12 +61,10 @@ int main()
    b[1]=7;
    b[2]=-6;
 //   SUBROUTINE DGEMV(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
-   dgemv_("N",&m,&n,&alpha,A,&lda,x,&incx,&beta,y,&incy);
+//   dgemv_("N",&m,&n,&alpha,A,&lda,x,&incx,&beta,y,&incy);
 //   for (int i=0;i<m;i++)
 //     cout << y[i] << endl;
    dgesvd_("A","A",&m,&n,A,&lda,s,U,&ldu,VT,&ldvt,old_work,&lwork,&info);
-   cout << "The optimal value of work is " << old_work[0]<< endl;
-   cout << info << endl;
    lwork=(int)old_work[0];
    work = new double[lwork];
    dgesvd_("A","A",&m,&n,A,&lda,s,U,&ldu,VT,&ldvt,work,&lwork,&info);
@@ -78,8 +76,7 @@ int main()
    cout << endl;
    cout << "********************" << endl;
    double *temp_u=new double[m];
-   double *z=new double[m];
-   for (int i=0;i<m;i++)
+   for (int i=0;i<n;i++)
     {
       for (int j=0;j<m;j++)
        {
@@ -87,8 +84,11 @@ int main()
        //  cout << temp_u[j]<< " ";
        }
      // cout << endl;   
-    z[i]=ddot_(&m,b,&incx,temp_u,&incx);
-    }
+    z[i]=ddot_(&m,b,&incx,temp_u,&incx)/s[i];
+    } 
+   dgemv_("T",&n,&n,&alpha,VT,&ldvt,z,&incx,&beta,y,&incy); 
+   for (int i=0;i<n;i++)
+       cout << y[i] << endl;
    return(0);
 }
 
