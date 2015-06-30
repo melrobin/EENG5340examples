@@ -6,6 +6,7 @@
 //   /*SUBROUTINE DGESV( N, NRHS, A, LDA, IPIV, B, LDB, INFO ) */
 extern "C"
 {
+   double dnrm2_(int *,double *,int *);  
    void dgeqrf_(int*,int*,double *,int *,double *,double *,int *,int *);
    void dorgqr_(int*,int*,int*,double*,int*,double*,double*,int*,int*);
    void dgesv_(int *,int *,double *,int *,int *,double *,int*,int *);
@@ -25,6 +26,7 @@ int main()
 {
   double A[6]={1,2,3,2,3,4},b[3]={3,5,9},tau[2],*work,new_work[1];
   double A1[6]={1,2,3,2,3,4};
+  double E;
   int lda=3,m=3,n=2,info,lwork=-1,two=2,inx=1;
   double R[n*n],Q[m*m],zero=0.; //Look at appropriate dimensions of Q and R
   dgeqrf_(&m,&n,A,&lda,tau,new_work,&lwork,&info); //Workspace query
@@ -41,7 +43,7 @@ int main()
   //print_matrix("R",n,n,R,n);
  //of course A now contains Q after DORGQR
  double alpha=1.0;
-  double y[n];
+  double y[n],residual[n];
   int  ipiv[n];
   dgemv_("T",&m,&n,&alpha,A,&m,b,&inx,&zero,y,&inx); //y=Q^Tb
   dgesv_(&n,&inx,R,&n,ipiv,y,&n,&info);
@@ -54,6 +56,13 @@ int main()
   }
   else
     std::cout <<"Something is amiss.  Don't trust yourself\n";
- return(0);
+  //Goal form Ax
+  dgemv_("N",&m,&n,&alpha,A1,&m,y,&inx,&zero,residual,&inx); 
+  for (i=0;i<n;i++)
+    residual[i]=(residual[i]-b[i]); //Form Ax-b
+  E=dnrm2_(&n,residual,&inx);
+  E*=E;
+  std::cout <<"The error for this example is " << E << std::endl;
+  return(0);
 }
 

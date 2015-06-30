@@ -68,22 +68,14 @@ int main()
    lwork=(int)old_work[0];
    work = new double[lwork];
    dgesvd_("A","A",&m,&n,A,&lda,s,U,&ldu,VT,&ldvt,work,&lwork,&info);
-  for (int i=0;i<n;i++)
-      cout << s[i] << endl;
    print_matrix("U",m,m,U,ldu);
-//   cout << endl;
-//   print_matrix("VT",n,n,VT,ldvt);
    cout << endl;
    cout << "********************" << endl;
    double *temp_u=new double[m];
    for (int i=0;i<n;i++)
     {
       for (int j=0;j<m;j++)
-       {
          temp_u[j]=U[i*m+j];
-       //  cout << temp_u[j]<< " ";
-       }
-     // cout << endl;   
     z[i]=ddot_(&m,b,&incx,temp_u,&incx)/s[i];
     } 
    dgemv_("T",&n,&n,&alpha,VT,&ldvt,z,&incx,&beta,y,&incy); 
