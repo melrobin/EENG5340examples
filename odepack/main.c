@@ -20,11 +20,13 @@ void g(int *neq,double *t,double *y,double *ydot)
 {
   double ft,eps=1e-16;
   
-/* Defines unit step function */
-  if (*t>=0.0)
+/* Defines unit step function 
+  if (*t>=4.0)
      ft=1.0;
   else
-     ft=0.0;
+     ft=0.0; */
+/* Define sinusoidal forcing function */
+  ft=cos(*t);
   ydot[0]=y[1];
   ydot[1]=ft-y[0]-3*y[1];
 }
@@ -47,7 +49,8 @@ int main(int argc,char *argv[])
    t=0;
    tout=t+delta;
    fprintf(fp,"%f\t%f\t%f\n",t,y[0],y[1]); /*Write the initial conditions */ 
-   for (j=0;j<Nsteps;j++)
+   for (j=0;j<Nsteps;j++) 
+/* Total time base = Nsteps*delta */
    {
       dlsode_(g,&NEQ,y,&t,&tout,&ITOL,&RTOL,&ATOL,&ITASK,&ISTATE,&IOPT,RWORK, &LRW,IWORK,&LIW,jac,&MF); /*Call our ODEPACK routine */
    tout=t+delta;/*Prepare the next end point in the simulation */
