@@ -42,8 +42,9 @@ int main(void)
   /*for (i=0;i<N;i++)
     printf("%f\t%f\n",Yf[i][0],Yf[i][1]); */
   conv3_plan=fftw_plan_dft_1d(N,Yf,y,FFTW_BACKWARD,FFTW_ESTIMATE);
+  fftw_execute(conv3_plan);
   for (i=0;i<N;i++)
-     printf("%f\t%f\n",y[i][0],y[i][1]);
+     printf("%f\t%f\n",y[i][0]/N,y[i][1]/N);
 
   fftw_destroy_plan(conv1_plan);
   fftw_destroy_plan(conv3_plan);
