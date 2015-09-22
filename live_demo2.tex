@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\begin{document}
+There are various ways to generate a \LaTeX document
+\begin{enumerate}
+\item TeXNiCCenter (PC)
+\item TeXShop (Mac)
+\item MikTeX
+\end{enumerate}
+This is the continuous Fourier Transform (?)
+\begin{equation*}
+F(\omega)=\int_{-\infty}^{\infty} f(t)e^{-j\omega t}\,dt
+\end{equation*}
+The equation for an infinite sum of a geometric series is:
+\begin{equation*}
+\sum_{n=0}^\infty r^n=\frac{1}{1-r}
+\end{equation*}
+for $|r|<1$
+
+\begin{verbatim}
+This is where you enter some source code
+#include <iostream>
+int main(int argc, char * argv[])
+{
+   cout << "This was cool once upon a time!" << endl;
+   return(0);
+}
+\end{verbatim}
+\begin{table}
+\begin{tabular}{cc}
+\toprule
+\midrule
+Slobodan &Kieu\\
+Liz & Jonathan Mendoza\\
+Ali & Chazettie\\
+\bottomrule
+\end{tabular}
+\caption{A list of students on row X}
+\end{table}
+We can even do some graphics!
+\includegraphics{/home/melrobin/research/MLP/livedemo.jpg}
+\end{document}
+
